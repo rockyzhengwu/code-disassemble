@@ -8,13 +8,17 @@
 import torch
 import torchvision
 from torch.jit.annotations import Tuple, List, Dict, Optional
-from torchvision.models.detection.transform  import  GeneralizedRCNNTransform
-from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
-from torchvision.models.detection.rpn import (AnchorGenerator, RPNHead, 
-    RegionProposalNetwork, concat_box_prediction_layers)
-from torchvision.ops import MultiScaleRoIAlign
-from torchvision.models.detection.faster_rcnn import FastRCNNPredictor, TwoMLPHead
-from torchvision.models.detection.roi_heads import RoIHeads
+# from torchvision.models.detection.transform  import  GeneralizedRCNNTransform
+# from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
+# from torchvision.models.detection.rpn import (AnchorGenerator, RPNHead, 
+#     RegionProposalNetwork, concat_box_prediction_layers)
+# from torchvision.ops import MultiScaleRoIAlign
+# from torchvision.models.detection.faster_rcnn import FastRCNNPredictor, TwoMLPHead
+# from torchvision.models.detection.roi_heads import RoIHeads
+
+from fasterrcnn.transform import GeneralizedRCNNTransform
+from fasterrcnn.backbone_util import resnet_fpn_backbone
+from fasterrcnn.rpn import AnchorGenerator,RPNHead , RegionProposalNetwork
 
 import numpy as np
 import cv2

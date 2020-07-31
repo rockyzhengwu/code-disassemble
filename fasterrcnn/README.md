@@ -361,7 +361,6 @@ print(box_features.shape)
 从输出的大小就能看到，每张图片对应的 2000 个 proposal 抽取了一个 [256, 7, 7] 的feature 有了这个 feature 就可以完成后续的预测得分以及位置信息。
 
 
-
 ROIHead 剩下的和 RPNHead 比较相似了，
 
 ```python
@@ -383,12 +382,3 @@ roi_heads = RoIHeads(
 detections, detector_losses = roi_heads(features, proposals, images.image_sizes, targets)
 
 ```
-
-
-
-
-
-
-
-
-

@@ -5,9 +5,9 @@
 import torch
 import torchvision
 from torch.jit.annotations import Tuple, List, Dict, Optional
+from fasterrcnn.transform import  GeneralizedRCNNTransform
+from fasterrcnn.backbone_util import resnet_fpn_backbone
 
-from torchvision.models.detection.transform  import  GeneralizedRCNNTransform
-from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
 import numpy as np
 import cv2
 import dataset
@@ -33,7 +33,10 @@ image_mean = [0.485, 0.456, 0.406]
 image_std = [0.229, 0.224, 0.225]
 transform = GeneralizedRCNNTransform(min_size, max_size, image_mean, image_std)
 images, targets = transform(images, targets)
-
+from fasterrcnn import vis_box
+print(targets[0]['boxes'].shape)
+vis_box.vis_box(images.tensors[0], targets[0]['boxes'])
+exit(0)
 #################### Feature
 ##### resnet
 # return_layers = {'layer1': '0', 'layer2': '1', 'layer3': '2', 'layer4': '3'}

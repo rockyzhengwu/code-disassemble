@@ -6,10 +6,13 @@ import torch
 import torchvision
 from torch.jit.annotations import Tuple, List, Dict, Optional
 
-from torchvision.models.detection.transform  import  GeneralizedRCNNTransform
-from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
-from torchvision.models.detection.rpn import (AnchorGenerator, RPNHead, 
-    RegionProposalNetwork, concat_box_prediction_layers)
+# from torchvision.models.detection.transform  import  GeneralizedRCNNTransform
+# from torchvision.models.detection.backbone_utils import resnet_fpn_backbone
+# from torchvision.models.detection.rpn import (AnchorGenerator, RPNHead, 
+#     RegionProposalNetwork, concat_box_prediction_layers)
+
+from fasterrcnn.backbone_util import resnet_fpn_backbone
+from fasterrcnn.rpn import AnchorGenerator, RPNHead, RegionProposalNetwork
 
 import numpy as np
 import cv2
@@ -62,12 +65,12 @@ rpn_anchor_generator = AnchorGenerator(anchor_sizes, aspect_ratios)
 ### rpn_head
 print(rpn_anchor_generator.num_anchors_per_location())
 rpn_head = RPNHead(out_channels, rpn_anchor_generator.num_anchors_per_location()[0])
-# objectness, pred_bbox_deltas = rpn_head(list(features.values()))
-# for obj in objectness:
-#   print(obj.shape)
-# for delta in pred_bbox_deltas:
-#   print(delta.shape)
-
+objectness, pred_bbox_deltas = rpn_head(list(features.values()))
+for obj in objectness:
+  print(obj.shape)
+for delta in pred_bbox_deltas:
+  print(delta.shape)
+exit(0)
 ### RegionProposalNetwork
 # rpn other parameter
 rpn_pre_nms_top_n_train=2000
