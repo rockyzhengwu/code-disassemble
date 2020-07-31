@@ -66,11 +66,7 @@ rpn_anchor_generator = AnchorGenerator(anchor_sizes, aspect_ratios)
 print(rpn_anchor_generator.num_anchors_per_location())
 rpn_head = RPNHead(out_channels, rpn_anchor_generator.num_anchors_per_location()[0])
 objectness, pred_bbox_deltas = rpn_head(list(features.values()))
-for obj in objectness:
-  print(obj.shape)
-for delta in pred_bbox_deltas:
-  print(delta.shape)
-exit(0)
+
 ### RegionProposalNetwork
 # rpn other parameter
 rpn_pre_nms_top_n_train=2000

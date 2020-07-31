@@ -503,8 +503,7 @@ class RegionProposalNetwork(torch.nn.Module):
         # num_images, num_anchor_per_image, 4
         proposals = proposals.view(num_images, -1, 4)
         boxes, scores = self.filter_proposals(proposals, objectness, images.image_sizes, num_anchors_per_level)
-        vis_box.vis_box(images.tensors[0], boxes[0][:100])
-        exit(0)
+        vis_box.vis_box(images.tensors[0], boxes[0][:100], 'predict_proposal.png')
 
         losses = {}
         if self.training:
@@ -513,9 +512,8 @@ class RegionProposalNetwork(torch.nn.Module):
             labels, matched_gt_boxes = self.assign_targets_to_anchors(anchors, targets)
             positive = torch.nonzero(labels[0]>= 1).squeeze(1)
             positive_box = anchors[0][positive]
-            print(positive_box)
             vis_box.vis_box(images.tensors[0], positive_box, "positive_box.png")
-            exit(0)
+
             regression_targets = self.box_coder.encode(matched_gt_boxes, anchors)
             loss_objectness, loss_rpn_box_reg = self.compute_loss(
                 objectness, pred_bbox_deltas, labels, regression_targets)
