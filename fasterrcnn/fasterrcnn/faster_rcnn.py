@@ -5,7 +5,8 @@ from torch import nn
 import torch.nn.functional as F
 
 from torchvision.ops import misc as misc_nn_ops
-from torchvision.ops import MultiScaleRoIAlign
+# from torchvision.ops import MultiScaleRoIAlign
+from poolers import MultiScaleRoIAlign
 try:
     from torch.hub import load_state_dict_from_url
 except ImportError:
